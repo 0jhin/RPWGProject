@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.selection.SelectionContainer
+import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
@@ -22,10 +23,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.unit.dp
 import com.example.rpwg.RandomPasswordGenerator.components.LongButton
 import com.example.rpwg.RandomPasswordGenerator.components.PasswordNumSlider
 import com.example.rpwg.layout.MainLayout
+import com.example.rpwg.util.toStyledAnnotatedString
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
@@ -45,6 +48,9 @@ fun RPWGScreen(modifier: Modifier = Modifier) {
     val scope = rememberCoroutineScope() // 코루틴스코프
 
     val characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_+=[]{}|;:,.<>?" // 뽑아낼 문자
+
+    // Retrieve a ClipboardManager object
+    val clipboardManager = LocalClipboardManager.current
 
     Column(horizontalAlignment = Alignment.CenterHorizontally, // 전체 배경
         verticalArrangement = Arrangement.spacedBy(100.dp, alignment = Alignment.Bottom),
@@ -70,9 +76,19 @@ fun RPWGScreen(modifier: Modifier = Modifier) {
                 value = sliderPosition,
                 onValueChange = { sliderPosition = it }
             ) // 비밀번호 슬라이더
-            Row { // 생성 된 비밀번호
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) { // 생성 된 비밀번호
                 Text("생성 된 비밀번호 : ")
                 SelectionContainer { Text(generatedPassword.value) }
+                Button(enabled = generatedPassword.value.isNotEmpty(),
+                    onClick = {
+                        // Copy "Hello, clipboard" to the clipboard
+                        clipboardManager.setText(generatedPassword.value.toStyledAnnotatedString())
+                    }
+                ) {
+                    Text("복사")
+                }
             } // 생성 된 비밀번호
         } // 메모 ~ 생성 된 비밀번호
 
