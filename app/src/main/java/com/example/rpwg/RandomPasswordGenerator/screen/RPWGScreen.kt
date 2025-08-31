@@ -19,14 +19,18 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.text.TextRange
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import com.example.rpwg.RandomPasswordGenerator.components.LongButton
 import com.example.rpwg.RandomPasswordGenerator.components.PasswordNumSlider
+import com.example.rpwg.RandomPasswordGenerator.data.RPWGRepository
 import com.example.rpwg.layout.MainLayout
 import com.example.rpwg.util.toStyledAnnotatedString
 import kotlinx.coroutines.launch
@@ -48,6 +52,12 @@ fun RPWGScreen(modifier: Modifier = Modifier) {
     val scope = rememberCoroutineScope() // 코루틴스코프
 
     val characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_+=[]{}|;:,.<>?" // 뽑아낼 문자
+
+    // rememberSaveable - 화면회전이 되어도 데이터 안날라가게 함
+//    var saver by rememberSaveable(stateSaver = TextFieldValue.Saver) {
+//        mutableStateOf(TextFieldValue(text = text,
+//            selection = TextRange(index = text.length)))
+//    }
 
     // Retrieve a ClipboardManager object
     val clipboardManager = LocalClipboardManager.current
@@ -103,7 +113,6 @@ fun RPWGScreen(modifier: Modifier = Modifier) {
             LongButton( // 생성 버튼
                 onClick = { // onClick
                     scope.launch { // scope.launch
-                        text = "" // 메모 필드 초기화
                         var isPasswordCorrect = false
                         while (!isPasswordCorrect) {
                             passwdStringList.clear() // 임시 리스트 초기화
@@ -125,7 +134,11 @@ fun RPWGScreen(modifier: Modifier = Modifier) {
             ) // 생성 버튼
             LongButton( // 저장 버튼
                 onClick = { // onClick
-//            RPWGRepository.addPassword()
+            RPWGRepository.addPassword(
+                memo = text,
+                password = generatedPassword.value
+            )
+            text = "" // 메모 필드 초기화
                 }, // onClick
                 text = "저장"
             ) // 저장 버튼

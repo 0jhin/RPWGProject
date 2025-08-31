@@ -54,6 +54,7 @@ import com.example.rpwg.MarketKurly.Screen.MarketKurlyScreen
 import com.example.rpwg.Menu.Screen.MenuRefactoringScreen
 import com.example.rpwg.Pager.Screen.PagerIntroScreen
 import com.example.rpwg.RandomPasswordGenerator.screen.RPWGScreen
+import com.example.rpwg.RandomPasswordGenerator.screen.SavedPasswordScreen
 import com.example.rpwg.TagUI.Screen.MySecondTagUIPracticeScreen
 import com.example.rpwg.TagUI.Screen.MyTagUIPracticeScreen
 import com.example.rpwg.layout.MainLayout
@@ -68,7 +69,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun MainScreen(modifier: Modifier = Modifier) {
 
-    val items = listOf<String>("비밀번호", "팝업", "바로가기", "온보딩", "멜론", "컬리", "매뉴", "레이아웃", "쇼핑몰", "카운터")
+    val items = listOf<String>("비밀번호 확인", "비밀번호", "팝업", "바로가기", "온보딩", "멜론", "컬리", "매뉴", "레이아웃", "쇼핑몰", "카운터")
 
     val pagerState = rememberPagerState(pageCount = { items.count() })
 
@@ -107,6 +108,9 @@ fun MainScreen(modifier: Modifier = Modifier) {
             val selectedItem = items[index]
 
             when (selectedItem) {
+                "비밀번호 확인" -> {
+                    SavedPasswordScreen()
+                }
                 "비밀번호" -> {
                     RPWGScreen()
                 }
