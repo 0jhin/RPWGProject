@@ -32,6 +32,7 @@ import com.example.rpwg.RandomPasswordGenerator.components.LongButton
 import com.example.rpwg.RandomPasswordGenerator.components.PasswordNumSlider
 import com.example.rpwg.RandomPasswordGenerator.data.RPWGRepository
 import com.example.rpwg.layout.MainLayout
+import com.example.rpwg.util.RandomPasswordGenerated
 import com.example.rpwg.util.toStyledAnnotatedString
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
@@ -45,13 +46,11 @@ fun RPWGScreen(modifier: Modifier = Modifier) {
 
     var sliderPosition by remember { mutableFloatStateOf(8f) } // 슬라이더 정수 반올림 .roundToInt()
 
-    val passwdStringList = remember { mutableStateListOf<String>() } // 뽑아낸 문자 담아둘 리스트
 
     val generatedPassword = remember { mutableStateOf<String>("") } // 리스트에서 가져온 완성된 패스워드
 
     val scope = rememberCoroutineScope() // 코루틴스코프
 
-    val characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_+=[]{}|;:,.<>?" // 뽑아낼 문자
 
     // rememberSaveable - 화면회전이 되어도 데이터 안날라가게 함
 //    var saver by rememberSaveable(stateSaver = TextFieldValue.Saver) {
@@ -112,33 +111,19 @@ fun RPWGScreen(modifier: Modifier = Modifier) {
         ) { // 생성 버튼 ~ 저장 버튼
             LongButton( // 생성 버튼
                 onClick = { // onClick
-                    scope.launch { // scope.launch
-                        var isPasswordCorrect = false
-                        while (!isPasswordCorrect) {
-                            passwdStringList.clear() // 임시 리스트 초기화
-                            for (i in 1..sliderPosition.roundToInt()) { // 1 부터 슬라이더 숫자 만큼 반복
-                                // characters에서 랜덤한 문자를 리스트에 넣는다
-                                passwdStringList.add(characters[(0..(characters.count() - 1)).random()].toString())
-                            }
-                            // 완성된 리스트를 하나의 문자열로 만든다
-                            generatedPassword.value = passwdStringList.joinToString(separator = "") { it.toString() }
-                            // 비밀번호 요건이 맞춰지면 반복 탈출
-                            if (hasAllPasswordRequirements(generatedPassword.value)) {
-                                isPasswordCorrect = true
-                            }
-                        }
-
-                    } // scope.launch
+                    generatedPassword.value = RandomPasswordGenerated(sliderPosition)
                 }, // onClick
                 text = "생성"
             ) // 생성 버튼
             LongButton( // 저장 버튼
                 onClick = { // onClick
-            RPWGRepository.addPassword(
-                memo = text,
-                password = generatedPassword.value
-            )
-            text = "" // 메모 필드 초기화
+                    if (text.isNotEmpty()) {
+                        RPWGRepository.addPassword(
+                            memo = text,
+                            password = generatedPassword.value
+                        )
+                    }
+                    text = "" // 메모 필드 초기화
                 }, // onClick
                 text = "저장"
             ) // 저장 버튼
@@ -149,17 +134,7 @@ fun RPWGScreen(modifier: Modifier = Modifier) {
 
 }
 
-fun hasAllPasswordRequirements(password: String): Boolean {
-    val passwordRequirements = listOf(
-        Regex(".*[a-z].*"),      // 소문자
-        Regex(".*[A-Z].*"),      // 대문자
-        Regex(".*[0-9].*"),        // 숫자
-        Regex(".*[!@#\$%^&*()-_+=].*") // 특수문자
-    )
 
-    // all 함수는 리스트의 모든 조건이 true일 때만 true를 반환
-    return passwordRequirements.all { it.matches(password) }
-}
 
 
 @Composable
