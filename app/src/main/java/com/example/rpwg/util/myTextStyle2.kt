@@ -1,12 +1,11 @@
-package com.example.myapplication0814.components
+package com.example.rpwg.util
 
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.sp
 
-val titleTextStyle = TextStyle(
+val titleTextStylee = TextStyle(
     fontSize = 20.sp,
     fontWeight = FontWeight.W600,
     color = Color.White

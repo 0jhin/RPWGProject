@@ -23,7 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.myapplication0808.ui.component.shoppingCartTextStyle
+import com.example.rpwg.util.shoppingCartTextStyle
 
 @Composable
 fun ShoppingCartTop() {

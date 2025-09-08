@@ -32,7 +32,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
-import com.example.myapplication0814.components.titleTextStyle7
+import com.example.rpwg.util.titleTextStyle7
+import com.example.rpwg.util.titleTextStyle8
 import com.example.rpwg.R
 
 @Composable

@@ -28,9 +28,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.myapplication0808.ui.component.appTitleTextStyle
-import com.example.myapplication0808.ui.component.headerCategoryTextStyle
-import com.example.myapplication0808.ui.component.locationTextStyle
+import com.example.rpwg.util.appTitleTextStyle
+import com.example.rpwg.util.headerCategoryTextStyle
+import com.example.rpwg.util.locationTextStyle
 
 
 enum class ButtonType{

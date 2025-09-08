@@ -22,12 +22,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.example.myapplication0808.ui.component.discountPercentPriceTextStyle
-import com.example.myapplication0808.ui.component.discountPriceTextStyle
-import com.example.myapplication0808.ui.component.originalPriceTextStyle
-import com.example.myapplication0808.ui.component.productDescriptionStyle
-import com.example.myapplication0808.ui.component.titleTextStyle
 import com.example.rpwg.R
+import com.example.rpwg.util.discountPercentPriceTextStyle
+import com.example.rpwg.util.discountPriceTextStyle
+import com.example.rpwg.util.originalPriceTextStyle
+import com.example.rpwg.util.productDescriptionStyle
+import com.example.rpwg.util.titleTextStyle
 
 
 data class ProductEntity(val title: String, val price: Int) {

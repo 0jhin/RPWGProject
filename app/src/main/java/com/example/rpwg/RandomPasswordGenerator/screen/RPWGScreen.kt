@@ -32,6 +32,11 @@ import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import com.example.rpwg.RandomPasswordGenerator.components.LongButton
+import com.example.rpwg.RandomPasswordGenerator.components.PasswordNumSlider
+import com.example.rpwg.RandomPasswordGenerator.data.RPWGRepository
+import com.example.rpwg.util.RandomPasswordGenerated
+import com.example.rpwg.util.toStyledAnnotatedString
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
