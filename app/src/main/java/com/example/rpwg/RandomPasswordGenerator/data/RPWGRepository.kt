@@ -1,7 +1,7 @@
 package com.example.rpwg.RandomPasswordGenerator.data
 
-import io.realm.kotlin.Realm
 import com.example.rpwg.RandomPasswordGenerator.data.model.Password
+import io.realm.kotlin.Realm
 import io.realm.kotlin.RealmConfiguration
 import io.realm.kotlin.ext.query
 import io.realm.kotlin.query.Sort

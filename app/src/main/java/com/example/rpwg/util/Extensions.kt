@@ -68,6 +68,7 @@ fun RandomPasswordGenerated(sliderPosition: Float) : String {
     return generatedPassword
 }
 
+
 fun hasAllPasswordRequirements(password: String): Boolean {
     val passwordRequirements = listOf(
         Regex(".*[a-z].*"),      // 소문자

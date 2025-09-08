@@ -11,10 +11,6 @@ import kotlin.math.roundToInt
 
 @Composable
 fun PasswordNumSlider(value: Float, onValueChange: (Float) -> Unit) {
-
-
-
-
     Column {
         Slider(
             value = value,

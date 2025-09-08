@@ -1,10 +1,9 @@
-package com.example.myapplication0808.ui.component
+package com.example.rpwg.util
 
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.sp
 
 val appTitleTextStyle = TextStyle(
     fontSize = 28.sp,
